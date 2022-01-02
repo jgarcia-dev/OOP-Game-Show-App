@@ -1,2 +1,8 @@
 # OOP Game Show App
- Browser-based, word guessing game. Created using the principles of Object-Oriented Programming.
+Project 4 for Treehouse Full Stack JavaScript Techdegree
+Browser-based, word guessing game. Created using the principles of Object-Oriented Programming.
+
+## Technologies used:
+- HTML
+- CSS
+- JavaScript
