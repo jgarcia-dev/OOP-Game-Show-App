@@ -113,7 +113,6 @@ class Game {
             overlay.setAttribute('class', 'lose');
         }
     
-        document.getElementById('btn__reset').textContent = 'Play Again';
         this.resetGame();
     }
 
