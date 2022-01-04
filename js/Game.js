@@ -47,10 +47,14 @@ class Game {
             const playerLetter = event.target.textContent;
         
             if (this.activePhrase.checkLetter(playerLetter)) {
+                // letter in phrase
                 this.activePhrase.showMatchedLetter(playerLetter);
                 event.target.classList.add('chosen');
-                // this.checkForWin();
+                if (this.checkForWin()) {
+                    this.gameOver();
+                };
             } else {
+                // letter not in phrase
                 event.target.classList.add('wrong');
                 this.removeLife();
             }
@@ -68,19 +72,48 @@ class Game {
             currHeart.setAttribute('src', 'images/lostHeart.png');
             this.missed += 1;
         } else {
-            // this.gameOver();
+            this.gameOver();
         }
     }
 
     /**
-     * Checks to see if player has revealed all letters of the active phrase
+     * Checks phrase to see if all the letters have been revealed
+     * @return {boolean} Boolean value indicating if all the letters are revealed (true) if they are, (false) if not.
      */
     checkForWin() {
+        const lettersHtmlCol = document.getElementsByClassName('letter');
+        
+        for (let element of lettersHtmlCol) {
+            if (element.classList.contains('show')) {
+                // letter is revealed
+                continue;
+            } else {
+                // letter not revealed
+                return false;
+            }
+        }
 
+        // all letters checked and revealed
+        return true;
     }
 
     /**
      * Displays the original screen overlay and message based on game outcome
      */
-    gameOver() {}
+    gameOver() {
+        const overlay = document.getElementById('overlay');
+        overlay.style.display = 'flex';
+
+        if (this.checkForWin()) {
+            // win
+            document.querySelector('.title').textContent = 'You Win!';
+            overlay.classList.replace('start', 'win');
+        } else {
+            // lose
+            document.querySelector('.title').textContent = "Sorry, you lose"
+            overlay.classList.replace('start', 'lose');
+        }
+    
+        document.getElementById('btn__reset').textContent = 'Play Again';
+    }
 }
