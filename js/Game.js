@@ -44,8 +44,6 @@ class Game {
      */
     handleInteraction(event) {
         
-        if (event.target.classList.contains('key')) {
-
             const playerLetter = event.target.textContent;
         
             if (this.activePhrase.checkLetter(playerLetter)) {
@@ -60,7 +58,6 @@ class Game {
                 event.target.classList.add('wrong');
                 this.removeLife();
             }
-        }
     }
 
     /**
@@ -117,5 +114,26 @@ class Game {
         }
     
         document.getElementById('btn__reset').textContent = 'Play Again';
+        this.resetGame();
+    }
+
+    resetGame() {
+        // clear game board phrase
+        const parentUl = document.getElementById('phrase').firstElementChild;
+        const letterLis = parentUl.querySelectorAll('li');
+        letterLis.forEach(li => li.remove());
+
+        // reset onscreen keyboard 
+        const keys = document.querySelectorAll('.key');
+        keys.forEach(key => {
+            key.className = '';
+            key.classList.add('key');
+        });
+
+        // reset lives
+        this.missed = 0;
+        document.querySelectorAll('.tries').forEach(item => {
+            item.firstElementChild.setAttribute('src', 'images/liveHeart.png');
+        });
     }
 }
