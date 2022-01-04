@@ -4,11 +4,12 @@
 
 class Phrase {
     constructor(phrase) {
+        // remove punctuation and make lowercase
         this.phrase = phrase.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,'').toLowerCase();
     }
 
     /**
-     * Adds letter placeholders to the display when game starts
+     * Adds phrase letter placeholders to the display game board
      */
     addPhraseToDisplay() {
         const phraseUl = document.getElementById('phrase').firstElementChild;
@@ -32,7 +33,7 @@ class Phrase {
     }
 
     /**
-     * Checks to see if the letter selected by the player matches a letter in the phrase
+     * Checks to see if letter exists in the phrase
      * @return {boolean} Boolean value indicating if letter is in phrase (true) or not (false)
      */
     checkLetter(letter) {
@@ -40,12 +41,13 @@ class Phrase {
     }
 
     /**
-     * Reveals the letter(s) on the board that matches the player's selection
+     * Reveals letter(s) on the game board phrase that match the player's selection
+     * @param {string} String of the letter a player has selected
      */
-    showMatchedLetter(letter) {
-        const matches = document.getElementsByClassName(letter);
+    showMatchedLetter(playerLetter) {
+        const matchesHTMLCol = document.getElementsByClassName(playerLetter);
 
-        for (let match of matches) {
+        for (let match of matchesHTMLCol) {
             match.classList.remove('hide');
             match.classList.add('show');
         }
