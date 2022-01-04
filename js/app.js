@@ -3,7 +3,7 @@
  * app.js */
 
 
-const game = new Game();
+let currGame = null;
 const resetBtn = document.getElementById('btn__reset');
 const keyboard = document.getElementById('qwerty');
 
@@ -13,11 +13,14 @@ const keyboard = document.getElementById('qwerty');
  */
 
 // Game start
-resetBtn.addEventListener('click', ()=> {
-    game.startGame();
+resetBtn.addEventListener('click', ()=> {  
+    currGame = new Game();
+    currGame.startGame();
 });
 
 // Player interaction
 keyboard,addEventListener('click', (event)=> {
-    game.handleInteraction(event);
+    if (event.target.classList.contains('key')) {     
+        currGame.handleInteraction(event);
+    }
 });
