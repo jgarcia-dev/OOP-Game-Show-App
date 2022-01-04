@@ -16,3 +16,8 @@ const keyboard = document.getElementById('qwerty');
 resetBtn.addEventListener('click', ()=> {
     game.startGame();
 });
+
+// Player interaction
+keyboard,addEventListener('click', (event)=> {
+    game.handleInteraction(event);
+});
