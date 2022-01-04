@@ -3,14 +3,14 @@
  * Game.js */
 
 class Game {
-    constructor(phrases) {
+    constructor() {
         this.missed = 0;
         this.phrases = [
-            new Phrase('May the Force be with you.'),
-            new Phrase('You shall not pass.'),
-            new Phrase('To infinity and beyond.'),
-            new Phrase('I am Iron Man.'),
-            new Phrase('Hasta La Vista, Baby.')
+            new Phrase('May the Force be with you'),
+            new Phrase('You shall not pass'),
+            new Phrase('To infinity and beyond'),
+            new Phrase('I am Iron Man'),
+            new Phrase('Hasta La Vista Baby')
         ];
         this.activePhrase = null;
     }
@@ -37,7 +37,9 @@ class Game {
 
     /**
      * Checks to see if the button clicked by the player matches a letter in the phrase.
-     * Detects the selected latter's keyboard button then directs the game based on a correct or incorrect guess.
+     * Detects the selected letter's onscreen keyboard button and disables it.
+     * Changes style of onscreen keyboard button based on if letter is in game board phrase or not.
+     * Updates game if based on player selection.
      * @param {object} event captured by event listener
      */
     handleInteraction(event) {
@@ -63,7 +65,7 @@ class Game {
 
     /**
      * Removes life from scoreboard
-     * Game ended once player has missed 5 times;
+     * Game ended once player has missed 5 times.
      */
     removeLife() {
         if (this.missed < 4) {
@@ -93,7 +95,7 @@ class Game {
             }
         }
 
-        // all letters checked and revealed
+        // all letters revealed
         return true;
     }
 
