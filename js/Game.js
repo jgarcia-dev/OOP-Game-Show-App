@@ -66,7 +66,7 @@ class Game {
      * Game ended once player has missed 5 times;
      */
     removeLife() {
-        if (this.missed < 5) {
+        if (this.missed < 4) {
             const tries = document.getElementsByClassName('tries');
             const currHeart = tries[this.missed].firstElementChild;
             currHeart.setAttribute('src', 'images/lostHeart.png');
