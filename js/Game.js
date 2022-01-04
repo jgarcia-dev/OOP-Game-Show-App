@@ -124,16 +124,16 @@ class Game {
         letterLis.forEach(li => li.remove());
 
         // reset onscreen keyboard 
-        const keys = document.querySelectorAll('.key');
-        keys.forEach(key => {
+        document.querySelectorAll('.key').forEach(key => {
             key.className = '';
             key.classList.add('key');
         });
 
         // reset lives
-        this.missed = 0;
         document.querySelectorAll('.tries').forEach(item => {
             item.firstElementChild.setAttribute('src', 'images/liveHeart.png');
         });
+
+        this.missed = 0;
     }
 }
