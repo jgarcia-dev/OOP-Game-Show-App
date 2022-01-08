@@ -42,7 +42,7 @@ class Phrase {
 
     /**
      * Reveals letter(s) on the game board phrase that match the player's selection
-     * @param {string} String of the letter a player has selected
+     * @param {string} playerLetter - letter a player has selected
      */
     showMatchedLetter(playerLetter) {
         const matchesHTMLCol = document.getElementsByClassName(playerLetter);
