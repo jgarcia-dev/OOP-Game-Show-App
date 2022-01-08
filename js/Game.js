@@ -13,6 +13,7 @@ class Game {
             new Phrase('Hasta La Vista Baby')
         ];
         this.activePhrase = null;
+        this.boardReady = false;
     }
 
     /**
@@ -27,37 +28,41 @@ class Game {
     }
 
     /**
-     * Sets up the game 
+     * Sets up the game
      */
     startGame() {
         document.getElementById('overlay').style.display = 'none';
+        document.getElementById('qwerty').style.display = 'block';
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
+        this.boardReady = true;
     }
 
     /**
-     * Checks to see if the button clicked by the player matches a letter in the phrase.
-     * Detects the selected letter's onscreen keyboard button and disables it.
-     * Changes style of onscreen keyboard button based on if letter is in game board phrase or not.
-     * Updates game if based on player selection.
-     * @param {object} event captured by event listener
+     * Handles player input interaction with onscreen and computer keyboard.
+     * Checks to see if player selected letter is n phrase and styles elements accordingly
+     * Checks if game is won or lost.
+     * @param {object} keyButton representing onscreen keyboard key the player selected.
      */
-    handleInteraction(event) {
-        
-            const playerLetter = event.target.textContent;
-        
-            if (this.activePhrase.checkLetter(playerLetter)) {
-                // letter in phrase
-                this.activePhrase.showMatchedLetter(playerLetter);
-                event.target.classList.add('chosen');
+    handleInteraction(keyButton) {
+        if (this.boardReady) {    
+            const playerChar = keyButton.textContent;
+
+            if (this.activePhrase.checkLetter(playerChar)) {
+                // if letter is in phrase
+                this.activePhrase.showMatchedLetter(playerChar);
+                keyButton.classList.add('chosen');
                 if (this.checkForWin()) {
                     this.gameOver();
-                };
+                }
             } else {
-                // letter not in phrase
-                event.target.classList.add('wrong');
-                this.removeLife();
+                // if letter is not in phrase
+                if (!keyButton.classList.contains('wrong')) {
+                    keyButton.classList.add('wrong');
+                    this.removeLife();
+                }
             }
+        }
     }
 
     /**
@@ -116,23 +121,30 @@ class Game {
         this.resetGame();
     }
 
+    /**
+     * clears phrase elements and resets game
+     */
     resetGame() {
         // clear game board phrase
         const parentUl = document.getElementById('phrase').firstElementChild;
         const letterLis = parentUl.querySelectorAll('li');
         letterLis.forEach(li => li.remove());
 
-        // reset onscreen keyboard 
-        document.querySelectorAll('.key').forEach(key => {
-            key.className = '';
-            key.classList.add('key');
+        // reset and onscreen keyboard 
+        [...document.querySelectorAll('.key')].forEach(keyEl => {
+            keyEl.className = '';
+            keyEl.classList.add('key');
         });
 
+        // hide onscreen keyboard
+        document.getElementById('qwerty').style.display = 'none';
+        
         // reset lives
-        document.querySelectorAll('.tries').forEach(item => {
-            item.firstElementChild.setAttribute('src', 'images/liveHeart.png');
+        document.querySelectorAll('.tries').forEach(tryEl => {
+            tryEl.firstElementChild.setAttribute('src', 'images/liveHeart.png');
         });
 
         this.missed = 0;
+        this.boardReady = false;
     }
 }
