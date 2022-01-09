@@ -110,11 +110,11 @@ class Game {
 
         if (this.checkForWin()) {
             // win
-            document.querySelector('.title').textContent = 'You Win!';
+            document.getElementById('game-over-message').textContent = "You Win!";
             overlay.setAttribute('class', 'win');
         } else {
             // lose
-            document.querySelector('.title').textContent = "Sorry, you lose"
+            document.getElementById('game-over-message').textContent = "Sorry, you lose"
             overlay.setAttribute('class', 'lose');
         }
     
