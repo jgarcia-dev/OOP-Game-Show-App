@@ -15,3 +15,13 @@ Once a letter is clicked on the keyboard it is disabled so the player can’t se
 - If a letter chosen is not in the phrase then the player will lose a life.  Heart icons at the bottom of the screen will indicate how many lives (tries) a player has left.  Players have 5 tries to guess the hidden phrase.
 - If a player exhausts all their lives before revealing the whole phrase they lose the game.
 - If a player reveals all the letters in the phrase before they run out of lives ,they win.
+
+## Added style Changes to original CSS
+- When a correct letter is revealed in phrase it will grow and exhibit a momentary small color shift.
+  - custom animations added to styles.css:
+    - growMe
+    - colorChange
+
+- When a key chosen is wrong it will also shake slightly.
+  - custom animation added to styles.css:
+    - wiggleMe
